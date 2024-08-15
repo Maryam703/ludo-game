@@ -1,0 +1,13 @@
+.token-container{
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inner-token{
+    display: inline;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+}
