@@ -237,7 +237,7 @@
   margin: 10px;
 }
 .green-token{
-  border: 14px solid green;
+  border: 14px solid rgb(17, 77, 17);
   border-radius: 50%;
   margin: 10px;
 }
@@ -247,7 +247,7 @@
   margin: 10px;
 }
 .yellow-token{
-  border: 14px solid yellow;
+  border: 14px solid rgb(185, 174, 16);
   border-radius: 50%;
   margin: 10px;
 }
