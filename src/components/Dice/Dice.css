@@ -9,7 +9,6 @@
     width: 38px;
     height: 38px;
     transform-style: preserve-3d;
-    transition: transform 1s; 
     display: inline;
   }
   

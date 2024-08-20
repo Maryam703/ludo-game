@@ -74,12 +74,21 @@
   align-items: center;
   justify-content: center;
 }
+.disable-dice{
+  height: 50px;
+  width: 50px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
 .ludo-box{
   height: 97%;
   width: 50%;
   border: 4px solid brown;
   border-radius: 8px;
-  background-color: white;
+  background-color: whitesmoke;
 }
 .upper-container{
  height: 39.5%;
@@ -180,7 +189,49 @@
   height: 100%;
   border: 1px solid transparent;
   background-size: cover;
-  background-image: url('https://media.istockphoto.com/id/942686712/vector/ludo-board-game.jpg?s=612x612&w=0&k=20&c=L8veIYYgGHAiT_UkFR-nFQo8Ru5eSBSn6Rbg0ySHaNU=');
+  margin-left: 4px;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ruLVUSE297dTo_tmjpLTyIn4x7t2bftmvhgdhyB4K_T6ap4BvPzV9g1pg3rSZWjTuPE&usqp=CAU');
+ }
+ .upper-res-box{
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+ }
+ .mid-res-box{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+ .right-mid{
+  height: 100%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+ }
+ .left-mid{
+  height: 100%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
+ }
+ .lower-res-box{
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
  }
  .green-blue-middle-container{
   width: 39.3%;
@@ -232,22 +283,96 @@
   border-bottom-right-radius: 8px;
 }
 .red-token{
-  border: 14px solid rgb(185, 9, 9);
+  background-color: rgb(185, 9, 9);
+  border: 2px solid black;
   border-radius: 50%;
   margin: 10px;
-}
+ }
 .green-token{
-  border: 14px solid rgb(17, 77, 17);
-  border-radius: 50%;
+  background-color: rgb(17, 77, 17); 
+  border: 2px solid black;
+   border-radius: 50%;
   margin: 10px;
 }
 .blue-token{
-  border: 14px solid rgb(15, 15, 134);
+  background-color: rgb(15, 15, 134);
+  border: 2px solid black;
   border-radius: 50%;
   margin: 10px;
 }
 .yellow-token{
-  border: 14px solid rgb(185, 174, 16);
+  background-color: rgb(185, 174, 16);
+  border: 2px solid black;
   border-radius: 50%;
   margin: 10px;
+}
+.red-res-token{
+  background-color: rgb(185, 9, 9);
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+ }
+ .blue-res-token{
+  background-color: rgb(15, 15, 134);
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+ }
+ .yellow-res-token{
+  background-color: rgb(185, 174, 16);
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+ }
+ .green-res-token{
+  background-color: rgb(17, 77, 17); 
+  border: 2px solid black;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+ }
+ .blink {
+  animation: blinker 0.8s linear infinite;
+  width:auto;
+  font-weight:bold;
+}
+@keyframes blinker {
+  25% {
+    opacity: 0.5;
+  }
+}
+.first-base-token{
+  height: auto;
+  width: auto;
+  position: absolute;
+}
+.sec-base-token{
+  height: auto;
+  width: auto;
+  position: absolute;
+  z-index: 2;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+.third-base-token{
+  height: auto;
+  width: auto;
+  position: absolute;
+  z-index: 4;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 50%;
+}
+.fourth-base-token{
+  height: auto;
+  width: auto;
+  position: absolute;
+  z-index: 6;
+  margin-top: 30px;
+  margin-left: 30px;
+  border-radius: 50%;
 }
