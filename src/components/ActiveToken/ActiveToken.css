@@ -1,0 +1,140 @@
+.blink {
+    animation: blinker 0.8s linear infinite;
+    width:auto;
+    font-weight:bold;
+    z-index: 20;
+  }
+@keyframes blinker {
+    25% {
+      opacity: 0.5;
+    }
+  }
+.position0{
+  position: absolute;
+  }
+.position1{
+  position: absolute;
+  margin-left: 8px;
+  margin-bottom: 4px;
+    z-index: 1;
+  }
+.position2{
+  position: absolute;
+  margin-left: 16px;
+  margin-bottom: 8px;
+    z-index: 2;
+  }
+.position3{
+  position: absolute;
+  margin-left: 24px;
+  margin-bottom: 12px;
+    z-index: 3;
+  }
+  .position4{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 4;
+    margin-top: 32px;
+    margin-left: 16px;
+    border-radius: 50%;
+  }
+  .position5{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index:5;
+    margin-top: 40px;
+    margin-left: 20px;
+    border-radius: 50%;
+  }
+  .position6{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 6;
+    margin-top: 48px;
+    margin-left: 24px;
+    border-radius: 50%;
+  }
+  .position7{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 7;
+    margin-top: 56px;
+    margin-left: 28px;
+    border-radius: 50%;
+  }
+  .position8{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 8;
+    margin-top: 64px;
+    margin-left: 32px;
+    border-radius: 50%;
+  }
+  .position9{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 9;
+    margin-top: 72px;
+    margin-left: 36px;
+    border-radius: 50%;
+  }
+  .position10{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 10;
+    margin-top: 80px;
+    margin-left: 40px;
+    border-radius: 50%;
+  }
+  .position11{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 11;
+    margin-top: 88px;
+    margin-left: 44px;
+    border-radius: 50%;
+  }
+  .position12{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 12;
+    margin-top: 96px;
+    margin-left: 48px;
+    border-radius: 50%;
+  }
+  .position13{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 13;
+    margin-top: 104px;
+    margin-left: 52px;
+    border-radius: 50%;
+  }
+  .position14{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 14;
+    margin-top: 112px;
+    margin-left: 56px;
+    border-radius: 50%;
+  }
+  .position15{
+    height: auto;
+    width: auto;
+    position: absolute;
+    z-index: 15;
+    margin-top: 120px;
+    margin-left: 60px;
+    border-radius: 50%;
+  }
