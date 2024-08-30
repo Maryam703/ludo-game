@@ -56,7 +56,7 @@ export default function Ludo() {
   })()
 
   useEffect(() => {
-    if (param === '2') {
+    if (param === '2player') {
       console.log("i am in effect")
       if (redActive) {
         let hasCompletedPath = Object.values(token.red).filter((val) => val === 106)
@@ -85,7 +85,7 @@ export default function Ludo() {
         }
       }
     }
-    if (param === '4') {
+    if (param === '4player') {
       if (redActive) {
         let hasCompletedPath = Object.values(token.red).filter((val) => val === 106)
         let nullPositions = Object.values(token.red).filter((val) => val === null)
@@ -167,6 +167,7 @@ export default function Ludo() {
 
   const moveToken = (positionKey) => {
     if (redActive) {
+
       if (token.red[positionKey] === null && diceNum === 6) {
         setToken(prev => ({
           ...prev,
@@ -377,7 +378,7 @@ export default function Ludo() {
           setDiceNum(null)
         }
         setRedActive(false)
-        setYellowActive(true)
+        param === '2player' ? setBlueActive(true) : setYellowActive(true)
       }
 
       if (token.red[positionKey] !== null && diceNum === 6) {
@@ -1771,7 +1772,7 @@ export default function Ludo() {
           setDiceNum(null)
         }
         setBlueActive(false)
-        setGreenActive(true)
+        param === '2player' ? setRedActive(true) : setGreenActive(true)
       }
       // when dice number equal to 6
 
@@ -2142,7 +2143,7 @@ export default function Ludo() {
           setDiceNum(null)
         }
         setBlueActive(false)
-        setGreenActive(true)
+        param === '2player' ? setRedActive(true) : setGreenActive(true)
       }
       if (token.blue[positionKey] >= 301 && diceNum === 6) {
         setToken((prev) => ({
@@ -2999,13 +3000,11 @@ export default function Ludo() {
     }
     return activeTokens
   }
-  console.log(token)
+
   return (
     <div className="main-container">
-      <div className="left-box">
-
+      <div className="upper-box">
         <div className="user-info">
-          {redActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice1" onRoll={() => handleDiceRoll("dice1")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
           <div className="user-box">
             <div className="user-dp-box">
               {token.red.position1 && token.red.position2 && token.red.position3 && token.red.position4 === 106 ? <Win /> :
@@ -3013,13 +3012,14 @@ export default function Ludo() {
             </div>
             <div className="userName">userName</div>
           </div>
+          {redActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice1" onRoll={() => handleDiceRoll("dice1")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
         </div>
 
         <div className="user-info">
-          {yellowActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice2" onRoll={() => handleDiceRoll("dice2")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
+          {greenActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice3" onRoll={() => handleDiceRoll("dice3")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
           <div className="user-box">
             <div className="user-dp-box">
-              {token.yellow.position1 && token.yellow.position2 && token.yellow.position3 && token.yellow.position4 === 406 ? <Win /> :
+              {token.green.position1 && token.green.position2 && token.green.position3 && token.green.position4 === 206 ? <Win /> :
                 <img className="user-dp" src='https://static.vecteezy.com/system/resources/previews/015/129/999/original/game-user-icon-png.png' />}
             </div>
             <div className="userName">userName</div>
@@ -3030,317 +3030,303 @@ export default function Ludo() {
       <div className="ludo-box">
         <div className="upper-container">
           <div className="red-box">
-            <div>
-              <div id='red1' onClick={() => { moveToken("position1") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position1 === null ? "red-token" : ""} /></div></div>
-              <div id='red2' onClick={() => { moveToken("position2") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position2 === null ? "red-token" : ""} /></div></div>
+            <div className='inner-box-token1'><div id='red1' onClick={() => { moveToken("position1") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position1 === null ? "red-token" : ""} /></div></div>
             </div>
-            <div>
-              <div id='red3' onClick={() => { moveToken("position3") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position3 === null ? "red-token" : ""} /></div></div>
-              <div id='red4' onClick={() => { moveToken("position4") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position4 === null ? "red-token" : ""} /></div></div>
+            <div className='inner-box-token2'><div id='red2' onClick={() => { moveToken("position2") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position2 === null ? "red-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token3'><div id='red3' onClick={() => { moveToken("position3") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position3 === null ? "red-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token4'><div id='red4' onClick={() => { moveToken("position4") }}><div className={redActive && diceNum === 6 ? 'blink' : ""}><Token color={token.red.position4 === null ? "red-token" : ""} /></div></div>
             </div>
           </div>
           <div className="red-green-middle-area">
-            <div className="zone" id='11' >11
-              {getTokens(11).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className="ver-zone">
+              <div className='ver-inner-zone' id='11'>
+                {getTokens(11).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className='ver-inner-zone' id='12' >
+                {getTokens(12).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className='ver-inner-zone' id='13' >
+                {getTokens(13).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='12' >12
-              {getTokens(12).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className="ver-zone">
+              <div className='ver-inner-zone' id='10' >
+                {getTokens(10).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-green-zone" id='201' >
+                {getTokens(201).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-green-zone" id='14' >
+                {getTokens(14).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
+            <div className="ver-zone">
+              <div className="ver-fix-red-zone" id='9' >
+                {getTokens(9).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-green-zone" id='202' >
+                {getTokens(202).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
 
-            <div className="zone" id='13' >13
-              {getTokens(13).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+              <div className="ver-inner-zone" id='15' >
+                {getTokens(15).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='10' >10
-              {getTokens(10).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className="ver-zone">
+              <div className="ver-inner-zone" id='8' >
+                {getTokens(8).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-green-zone" id='203' >
+                {getTokens(203).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='16' >
+                {getTokens(16).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
+            <div className="ver-zone">
+              <div className="ver-inner-zone" id='7' >
+                {getTokens(7).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-green-zone" id='204' >
+                {getTokens(204).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
 
-            <div className="green-fix-zone" id='201' >201
-              {getTokens(201).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+              <div className="ver-inner-zone" id='17'>
+                {getTokens(17).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="green-fix-zone" id='14' >14
-              {getTokens(14).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='9' >9
-              {getTokens(9).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="green-fix-zone" id='202' >202
-              {getTokens(202).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='15' >15
-              {getTokens(15).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='8' >8
-              {getTokens(8).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="green-fix-zone" id='203' >203
-              {getTokens(203).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='16' >16
-              {getTokens(16).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='7' >7
-              {getTokens(7).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="green-fix-zone" id='204' >204
-              {getTokens(204).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-
-            </div>
-
-            <div className="zone" id='17'>17
-              {getTokens(17).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='6'>6
-              {getTokens(6).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="green-fix-zone" id='205' >205
-              {getTokens(205).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='18' >18
-              {getTokens(18).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className="ver-zone">
+              <div className="ver-inner-zone" id='6'>
+                {getTokens(6).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-green-zone" id='205' >
+                {getTokens(205).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='18' >
+                {getTokens(18).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
           </div>
           <div className="green-box">
-            <div>
-              <div onClick={() => { moveToken("position1") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position1 === null ? "green-token" : ""} /></div></div>
-              <div onClick={() => { moveToken("position2") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position2 === null ? "green-token" : ""} /></div></div>
+            <div className='inner-box-token1'><div onClick={() => { moveToken("position1") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position1 === null ? "green-token" : ""} /></div></div>
             </div>
-            <div>
-              <div onClick={() => { moveToken("position3") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position3 === null ? "green-token" : ""} /></div></div>
-              <div onClick={() => { moveToken("position4") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position4 === null ? "green-token" : ""} /></div></div>
+            <div className='inner-box-token2'><div onClick={() => { moveToken("position2") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position2 === null ? "green-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token3'><div onClick={() => { moveToken("position3") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position3 === null ? "green-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token4'><div onClick={() => { moveToken("position4") }}><div className={greenActive && diceNum === 6 ? "blink" : ""}><Token color={token.green.position4 === null ? "green-token" : ""} /></div></div>
             </div>
           </div>
         </div>
 
         <div className="middle-container">
           <div className="red-yellow-middle-container">
-            <div className="zone" id='52' >52
-              {getTokens(52).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='horizontal-zone'>
+              <div className="horizontal-inner-zone" id='52' >
+                {getTokens(52).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-red-zone" id='1' >
+                {getTokens(1).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='2' >
+                {getTokens(2).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='3' >
+                {getTokens(3).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='4' >
+                {getTokens(4).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='5' >
+                {getTokens(5).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
+            <div className='horizontal-zone'>
+              <div className="horizontal-inner-zone" id='51' >
+                {getTokens(51).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-red-zone" id='101'>
+                {getTokens(101).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-red-zone" id='102'>
+                {getTokens(102).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-red-zone" id='103'>
+                {getTokens(103).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
 
-            <div className="zone" id='51' >51
-              {getTokens(51).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+              <div className="horizontal-fix-red-zone" id='104'>
+                {getTokens(104).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-red-zone" id='105'>
+                {getTokens(105).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='50' >50
-              {getTokens(50).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='1' >1
-              {getTokens(1).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='101'>101
-              {getTokens(101).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='49' >49
-              {getTokens(49).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='2' >2
-              {getTokens(2).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='102'>102
-              {getTokens(102).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="yellow-fix-zone" id='48' >48
-              {getTokens(48).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='3' >3
-              {getTokens(3).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='103'>103
-              {getTokens(103).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='47' >47
-              {getTokens(47).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='4' >4
-              {getTokens(4).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='104'>104
-              {getTokens(104).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='46' >46
-              {getTokens(46).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='5' >5
-              {getTokens(5).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="red-fix-zone" id='105'>105
-              {getTokens(105).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='45' >45
-              {getTokens(45).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='horizontal-zone'>
+              <div className="horizontal-inner-zone" id='50' >
+                {getTokens(50).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='49' >
+                {getTokens(49).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-yellow-zone" id='48' >
+                {getTokens(48).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='47' >
+                {getTokens(47).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='46' >
+                {getTokens(46).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='45' >
+                {getTokens(45).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
           </div>
 
@@ -3375,331 +3361,318 @@ export default function Ludo() {
           </div>
 
           <div className="green-blue-middle-container">
-            <div className="zone" id='19' >19
-              {getTokens(19).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='horizontal-zone'>
+              <div className="horizontal-inner-zone" id='19' >
+                {getTokens(19).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='20' >
+                {getTokens(20).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='21' >
+                {getTokens(21).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-green-zone" id='22' >
+                {getTokens(22).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='23' >
+                {getTokens(23).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='24' >
+                {getTokens(24).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-            <div className="blue-fix-zone" id='305' >305
-              {getTokens(305).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='horizontal-zone'>
+              <div className="horizontal-fix-blue-zone" id='305' >
+                {getTokens(305).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-blue-zone" id='304' >
+                {getTokens(304).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-blue-zone" id='303' >
+                {getTokens(303).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-blue-zone" id='302' >
+                {getTokens(302).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-blue-zone" id='301' >
+                {getTokens(301).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='25' >
+                {getTokens(25).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='31' >31
-              {getTokens(31).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='20' >20
-              {getTokens(20).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="blue-fix-zone" id='304' >304
-              {getTokens(304).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='30' >30
-              {getTokens(30).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='21' >21
-              {getTokens(21).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="blue-fix-zone" id='303' >303
-              {getTokens(303).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='29' >29
-              {getTokens(29).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="green-fix-zone" id='22' >22
-              {getTokens(22).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="blue-fix-zone" id='302' >302
-              {getTokens(302).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='28' >28
-              {getTokens(28).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='23' >23
-              {getTokens(23).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="blue-fix-zone" id='301' >301
-              {getTokens(301).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="blue-fix-zone" id='27' >27
-              {getTokens(27).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='24' >24
-              {getTokens(24).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='25' >25
-              {getTokens(25).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='26' >26
-              {getTokens(26).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='horizontal-zone'>
+              <div className="horizontal-inner-zone" id='31' >
+                {getTokens(31).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='30' >
+                {getTokens(30).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='29' >
+                {getTokens(29).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='28' >
+                {getTokens(28).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-fix-blue-zone" id='27' >
+                {getTokens(27).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="horizontal-inner-zone" id='26' >
+                {getTokens(26).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
 
         <div className="lower-container">
           <div className="yellow-box">
-            <div>
-              <div onClick={() => { moveToken("position1") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position1 === null ? "yellow-token" : ""} /></div></div>
-              <div onClick={() => { moveToken("position2") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position2 === null ? "yellow-token" : ""} /></div></div>
+            <div className='inner-box-token1'><div onClick={() => { moveToken("position1") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position1 === null ? "yellow-token" : ""} /></div></div>
             </div>
-            <div>
-              <div onClick={() => { moveToken("position3") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position3 === null ? "yellow-token" : ""} /></div></div>
-              <div onClick={() => { moveToken("position4") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position4 === null ? "yellow-token" : ""} /></div></div>
+            <div className='inner-box-token2'><div onClick={() => { moveToken("position2") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position2 === null ? "yellow-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token3'><div onClick={() => { moveToken("position3") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position3 === null ? "yellow-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token4'><div onClick={() => { moveToken("position4") }}><div className={yellowActive && diceNum === 6 ? 'blink' : ""}><Token color={token.yellow.position4 === null ? "yellow-token" : ""} /></div></div>
             </div>
           </div>
           <div className="yellow-blue-middle-area">
-            <div className="zone" id='44' >44
-              {getTokens(44).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='ver-zone'>
+              <div className="ver-inner-zone" id='44' >
+                {getTokens(44).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-yellow-zone" id='403' >
+                {getTokens(405).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='32' >
+                {getTokens(32).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="yellow-fix-zone" id='403' >405
-              {getTokens(405).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='ver-zone'>
+              <div className="ver-inner-zone" id='43' >
+                {getTokens(43).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-yellow-zone" id='404' >
+                {getTokens(404).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='33' >
+                {getTokens(33).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='32' >32
-              {getTokens(32).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='ver-zone'>
+              <div className="ver-inner-zone" id='42' >
+                {getTokens(42).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-yellow-zone" id='403' >
+                {getTokens(403).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='34' >
+                {getTokens(34).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='43' >43
-              {getTokens(43).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='ver-zone'>
+              <div className="ver-inner-zone" id='41' >
+                {getTokens(41).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-yellow-zone" id='402' >
+                {getTokens(402).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-blue-zone" id='35' >
+                {getTokens(35).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="yellow-fix-zone" id='404' >404
-              {getTokens(404).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='ver-zone'>
+              <div className="ver-fix-yellow-zone" id='40' >
+                {getTokens(40).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-fix-yellow-zone" id='401' >
+                {getTokens(401).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='36' >
+                {getTokens(36).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
-
-            <div className="zone" id='33' >33
-              {getTokens(33).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='42' >42
-              {getTokens(42).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="yellow-fix-zone" id='403' >403
-              {getTokens(403).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='34' >34
-              {getTokens(34).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='41' >41
-              {getTokens(41).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="yellow-fix-zone" id='402' >402
-              {getTokens(402).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="blue-fix-zone" id='35' >35
-              {getTokens(35).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="yellow-fix-zone" id='40' >40
-              {getTokens(40).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="yellow-fix-zone" id='401' >401
-              {getTokens(401).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}</div>
-
-            <div className="zone" id='36' >36
-              {getTokens(36).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='39' >39
-              {getTokens(39).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='38' >38
-              {getTokens(38).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
-            </div>
-
-            <div className="zone" id='37' >37
-              {getTokens(37).map((val, index) => {
-                return (
-                  <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
-                )
-              })}
+            <div className='ver-zone'>
+              <div className="ver-inner-zone" id='39' >
+                {getTokens(39).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='38' >
+                {getTokens(38).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
+              <div className="ver-inner-zone" id='37' >
+                {getTokens(37).map((val, index) => {
+                  return (
+                    <ActiveToken activeColor={activeColor} tokenColor={val.styleClass} token={val.token} diceNum={diceNum} positionsIdx={index} moveToken={() => moveToken(val.token)} />
+                  )
+                })}
+              </div>
             </div>
           </div>
           <div className="blue-box">
-            <div>
-              <div onClick={() => { moveToken("position1") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position1 === null ? "blue-token" : ""} /></div></div>
-              <div onClick={() => { moveToken("position2") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position2 === null ? "blue-token" : ""} /></div></div>
+            <div className='inner-box-token1'><div onClick={() => { moveToken("position1") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position1 === null ? "blue-token" : ""} /></div></div>
             </div>
-            <div>
-              <div onClick={() => { moveToken("position3") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position3 === null ? "blue-token" : ""} /></div></div>
-              <div onClick={() => { moveToken("position4") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position4 === null ? "blue-token" : ""} /></div></div>
+            <div className='inner-box-token2'><div onClick={() => { moveToken("position2") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position2 === null ? "blue-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token3'><div onClick={() => { moveToken("position3") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position3 === null ? "blue-token" : ""} /></div></div>
+            </div>
+            <div className='inner-box-token4'><div onClick={() => { moveToken("position4") }}><div className={blueActive && diceNum === 6 ? 'blink' : ""}><Token color={token.blue.position4 === null ? "blue-token" : ""} /></div></div>
             </div>
           </div>
         </div>
       </div>
-      <div className="right-box">
+      <div className="lower-box">
         <div className="user-info">
           <div className="user-box">
             <div className="user-dp-box">
-              {token.green.position1 && token.green.position2 && token.green.position3 && token.green.position4 === 206 ? <Win /> :
+              {token.yellow.position1 && token.yellow.position2 && token.yellow.position3 && token.yellow.position4 === 406 ? <Win /> :
                 <img className="user-dp" src='https://static.vecteezy.com/system/resources/previews/015/129/999/original/game-user-icon-png.png' />}
             </div>
             <div className="userName">userName</div>
           </div>
-          {greenActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice3" onRoll={() => handleDiceRoll("dice3")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
+          {yellowActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice2" onRoll={() => handleDiceRoll("dice2")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
         </div>
 
         <div className="user-info">
+          {blueActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice4" onRoll={() => handleDiceRoll("dice4")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
           <div className="user-box">
             <div className="user-dp-box">
               {token.blue.position1 && token.blue.position2 && token.blue.position3 && token.blue.position4 === 306 ? <Win /> :
@@ -3707,7 +3680,6 @@ export default function Ludo() {
             </div>
             <div className="userName">userName</div>
           </div>
-          {blueActive ? <div className={diceNum ? "disable-dice" : "dice-box"}><Dice id="dice4" onRoll={() => handleDiceRoll("dice4")} diceNum={diceNum} /></div> : <div className="dice-box"></div>}
         </div>
       </div>
     </div>

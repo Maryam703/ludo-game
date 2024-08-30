@@ -11,7 +11,6 @@
     transform-style: preserve-3d;
     display: inline;
   }
-  
   .dot {
     position: absolute;
     width: 6px;
@@ -31,7 +30,6 @@
     text-align: center;
     line-height: 2em;
   }
-
   .deactive-side {
     position: absolute;
     background-color: rgb(204, 60, 60);
@@ -138,4 +136,29 @@
     top: 50%;
     left: 80%; 
   }
-  
+  @media screen and (max-width : 1000px) {
+    .side {
+      width: 32px;
+      height: 32px;
+    }  
+    .dot {
+      width: 5px;
+      height: 7px;
+    }
+  }
+  @media screen and (max-width : 700px) {
+    .side {
+      width: 28px;
+      height: 28px;
+    }  
+    .dot {
+      width: 4px;
+      height: 6px;
+    }
+  }
+  @media screen and (max-width : 500px) {
+    .side {
+      width: 25px;
+      height: 25px;
+    }  
+  }

@@ -12,9 +12,8 @@ export default function Home() {
       </div>
 
       <div className='body'>
-        <Link to={`/Ludo/2`} className='playerCard'>2 Players</Link>
-        <Link to={`/Ludo/4`} className='playerCard'>4 Players</Link>
-        <Link to={`/Ludo/play-with-friend`} className='playerCard'>Play with Friends</Link>
+        <Link to={`/Ludo/2player`} className='playerCard'>2 Players</Link>
+        <Link to={`/Ludo/4player`} className='playerCard'>4 Players</Link>
         <Link to={`/Ludo/offline`} className='playerCard'>Offline</Link>
       </div>
 

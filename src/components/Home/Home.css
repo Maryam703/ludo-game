@@ -30,7 +30,7 @@
     height: 100%;
     width: 10%;
     color: white;
-    font-size: 42px;
+    font-size: 38px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -40,13 +40,14 @@
     height: 82vh;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     background-color: rgb(40, 40, 100);
 }
 .playerCard{
-    height: 280px;
-    width: 350px;
+    height: 270px;
+    width: 340px;
     font-size: 36px;
     font-weight: 500;
     font-family: 'Times New Roman', Times, serif;
@@ -58,12 +59,13 @@
     background-size: cover;
     text-decoration: none;
     margin-right: 20px;
+    margin-left: 20px;
     background-image: url('https://miro.medium.com/v2/resize:fit:500/1*PCdBQAm7FW-C73pKAqFrog.png');
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 30px 0 rgba(0, 0, 0, 0.19);
 }
 .playerCard:hover{
-    height: 284px;
-    width: 354px;
+    height: 274px;
+    width: 344px;
     z-index: 1;
 }
 .footer{
@@ -83,6 +85,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid rgb(40, 40, 100);
+    border-radius: 2px;
 }
 .icons-name{
     font-size: 16px;
@@ -91,4 +94,54 @@
 }
 .footer-icons:hover{
     border: 1px solid white;
+}
+
+@media screen and (max-width: 759px) {
+    .user-img-box{
+        width: 20%;
+    }
+    .user-img{
+        height: 42px;
+        width: 42px;
+        margin-left: 14px;
+    }
+    .setting{
+        font-size: 32px;
+        margin-right: 10px;
+    }
+    .playerCard{
+        height: 270px;
+        width: 180px;
+        font-size: 24px;
+    }
+    .playerCard:hover{
+        height: 274px;
+        width: 180px;
+    }
+    .footer-icons{
+        font-size: 28px;
+    }
+    .icons-name{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 439px) {
+    .playerCard{
+        height: 250px;
+        width: 150px;
+    }
+     .playerCard:hover{
+        height: 254px;
+        width: 154px;
+    }
+}
+@media screen and (max-width: 379px) {
+   .playerCard{
+        height: 230px;
+        width: 140px;
+    }
+    .playerCard:hover{
+        height: 234px;
+        width: 144px;
+    }
 }
