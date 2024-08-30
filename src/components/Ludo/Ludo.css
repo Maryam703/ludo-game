@@ -377,29 +377,29 @@
     background-color: rgb(185, 9, 9);
     border: 2px solid black;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 32%;
+    width: 45%;
    }
    .blue-res-token{
     background-color: rgb(15, 15, 134);
     border: 2px solid black;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 32%;
+    width: 45%;
    }
    .yellow-res-token{
     background-color: rgb(185, 174, 16);
     border: 2px solid black;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 99%;
+    width: 20%;
    }
    .green-res-token{
     background-color: rgb(17, 77, 17); 
     border: 2px solid black;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 99%;
+    width: 20%;
    }
    .blink {
     animation: blinker 0.8s linear infinite;

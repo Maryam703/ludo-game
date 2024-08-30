@@ -3349,7 +3349,6 @@ export default function Ludo() {
                 {token.blue.position2 === 306 && <div className='blue-res-token'></div>}
                 {token.blue.position3 === 306 && <div className='blue-res-token'></div>}
                 {token.blue.position4 === 306 && <div className='blue-res-token'></div>}
-
               </div>
             </div>
             <div className='lower-res-box'>
